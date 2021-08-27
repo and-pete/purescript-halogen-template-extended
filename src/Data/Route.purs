@@ -1,13 +1,12 @@
 -- | See comments in purescript-halogen-realworld (RHW)'s `Conduit.Data.Route` module:
 -- | https://github.com/thomashoneyman/purescript-halogen-realworld/blob/main/src/Data/Route.purs
 
-module Data.Route where
+module App.Data.Route where
 
 import Prologue
 
 import Data.Generic.Rep (class Generic)
 import Data.Show.Generic (genericShow)
-
 import Routing.Duplex ( RouteDuplex', root )
 import Routing.Duplex.Generic as RDG
 import Routing.Duplex.Generic (noArgs)

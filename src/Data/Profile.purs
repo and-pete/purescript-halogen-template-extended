@@ -5,9 +5,9 @@
 -- | on the bare minimum required for SPA page routing and on having a global `Store` carrying the
 -- | currently logged-in user's `Profile`.
 
-module Data.Profile where
+module App.Data.Profile where
 
-import Data.Username (Username)
+import App.Data.Username (Username)
 
 type Profile =
   { username :: Username

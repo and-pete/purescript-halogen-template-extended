@@ -1,7 +1,7 @@
 -- | See comments in purescript-halogen-realworld (RHW)'s `Conduit.Component.Router` module:
 -- | https://github.com/thomashoneyman/purescript-halogen-realworld/blob/main/src/Component/Router.purs
 
-module Component.Router where
+module App.Component.Router where
 
 import Prologue
 
@@ -14,17 +14,17 @@ import Halogen.Store.Monad (class MonadStore)
 import Routing.Duplex as RD
 import Routing.Hash as RH
 
-import Capability.Navigate (class MonadNavigate)
-import Capability.Navigate as Navigate
-import Capability.Resource.User (class MonadUser)
-import Component.HTML.Navbar (navbarPageWrapper)
-import Data.Profile (Profile)
-import Data.Route (Route(..), routeCodec)
-import Page.Home as Home
-import Page.Login as Login
-import Page.Secrets as Secrets
-import Store as Store
-import Store (Store)
+import App.Capability.Navigate (class MonadNavigate)
+import App.Capability.Navigate as Navigate
+import App.Capability.Resource.User (class MonadUser)
+import App.Component.HTML.Navbar (navbarPageWrapper)
+import App.Data.Profile (Profile)
+import App.Data.Route (Route(..), routeCodec)
+import App.Page.Home as Home
+import App.Page.Login as Login
+import App.Page.Secrets as Secrets
+import App.Store as Store
+import App.Store (Store)
 
 data Query a = Navigate Route a
 
