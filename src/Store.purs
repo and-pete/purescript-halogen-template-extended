@@ -1,14 +1,14 @@
 -- | See comments in purescript-halogen-realworld's `Conduit.Store` module:
 -- | https://github.com/thomashoneyman/purescript-halogen-realworld/blob/main/src/Store.purs
 
-module Store where
+module App.Store where
 
 import Prologue
 
 import Control.Monad.State (class MonadState)
 import Halogen as H
 
-import Data.Profile (Profile)
+import App.Data.Profile (Profile)
 
 type Store =
   { currentUser :: Maybe Profile

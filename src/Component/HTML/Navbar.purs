@@ -1,4 +1,4 @@
-module Component.HTML.Navbar
+module App.Component.HTML.Navbar
   ( navbarPageWrapper
   ) where
 
@@ -7,9 +7,9 @@ import Prologue
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 
-import Data.Profile (Profile)
-import Data.Route (Route(..))
-import Component.HTML.Util (navItem, whenElem)
+import App.Data.Profile (Profile)
+import App.Data.Route (Route(..))
+import App.Component.HTML.Util (navItem, whenElem)
 
             
 navbarPageWrapper

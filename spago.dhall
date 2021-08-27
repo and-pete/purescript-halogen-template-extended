@@ -7,7 +7,6 @@
     [ "aff"
     , "arrays"
     , "bifunctors"
-    , "console"
     , "const"
     , "effect"
     , "either"

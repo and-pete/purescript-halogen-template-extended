@@ -1,7 +1,7 @@
 -- | See comments in purescript-halogen-realworld (RHW)'s `Conduit.Data.Username` module:
 -- | https://github.com/thomashoneyman/purescript-halogen-realworld/blob/main/src/Data/Username.purs
 
-module Data.Username
+module App.Data.Username
   ( Username
   , parse
   , toString

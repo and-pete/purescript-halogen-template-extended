@@ -11,9 +11,9 @@ import Halogen.VDom.Driver (runUI)
 import Routing.Hash as RH
 import Routing.Duplex as RD
 
-import AppM (runAppM)
-import Component.Router as Router
-import Data.Route (routeCodec)
+import App.AppM (runAppM)
+import App.Component.Router as Router
+import App.Data.Route (routeCodec)
 
 main :: Effect Unit
 main = HA.runHalogenAff do

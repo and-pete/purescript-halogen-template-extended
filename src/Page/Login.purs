@@ -1,4 +1,4 @@
-module Page.Login where
+module App.Page.Login where
 
 import Prologue
 
@@ -9,12 +9,12 @@ import Web.Event.Event as Event
 import Web.UIEvent.MouseEvent (MouseEvent)
 import Web.UIEvent.MouseEvent as MouseEvent
 
-import Capability.Navigate (class MonadNavigate)
-import Capability.Navigate as Navigate
-import Capability.Resource.User (class MonadUser)
-import Capability.Resource.User as User
-import Data.Username as Username
-import Data.Route (Route(..))
+import App.Capability.Navigate (class MonadNavigate)
+import App.Capability.Navigate as Navigate
+import App.Capability.Resource.User (class MonadUser)
+import App.Capability.Resource.User as User
+import App.Data.Username as Username
+import App.Data.Route (Route(..))
 
 type Input = { redirect :: Boolean }
 

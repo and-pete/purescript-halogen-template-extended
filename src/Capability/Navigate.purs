@@ -1,13 +1,13 @@
 -- | See comments in purescript-halogen-realworld's `Conduit.Capability.Navigate` module:
 -- | https://github.com/thomashoneyman/purescript-halogen-realworld/blob/main/src/Capability/Navigate.purs
 
-module Capability.Navigate where
+module App.Capability.Navigate where
 
 import Prologue
 
 import Halogen as H
 
-import Data.Route (Route)
+import App.Data.Route (Route)
 
 
 class Monad m <= MonadNavigate m where

@@ -1,7 +1,7 @@
 -- | See comments in purescript-halogen-realworld's `Conduit.Component.HTML.Utils` module:
 -- | https://github.com/thomashoneyman/purescript-halogen-realworld/blob/main/src/Component/HTML/Utils.purs
 
-module Component.HTML.Util where
+module App.Component.HTML.Util where
 
 import Prologue
 
@@ -9,7 +9,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Routing.Duplex as RD
 
-import Data.Route (Route, routeCodec)
+import App.Data.Route (Route, routeCodec)
 
 safeHref :: forall r i. Route -> HH.IProp ( href :: String | r) i
 safeHref = HP.href <<< append "#" <<< RD.print routeCodec

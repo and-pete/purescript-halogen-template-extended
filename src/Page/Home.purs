@@ -1,4 +1,4 @@
-module Page.Home where
+module App.Page.Home where
 
 import Prologue
 
@@ -8,10 +8,10 @@ import Halogen.Store.Connect as HSC
 import Halogen.Store.Monad (class MonadStore)
 import Halogen.Store.Select as HSS
 
-import Data.Username as Username
-import Data.Profile (Profile)
-import Store (Store)
-import Store as Store
+import App.Data.Username as Username
+import App.Data.Profile (Profile)
+import App.Store (Store)
+import App.Store as Store
 
 type Context = Maybe Profile
 type Input = Unit
