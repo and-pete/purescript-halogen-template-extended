@@ -52,6 +52,8 @@ Comments, feedback, etc. are all always welcome.
 
 Enoy! -Peter :)
 
+<!-- Modifications copyright (C) 2021 Peter Andersen -->
+
 --- 
 
 The original [purescript-halogen-template](https://github.com/purescript-halogen/purescript-halogen-template) README is included below. If this is Day #1 of Halogen for you, you should start with that simpler repository (...and of course with the [official PureScript Halogen Guide](https://purescript-halogen.github.io/purescript-halogen/)).

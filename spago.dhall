@@ -1,3 +1,4 @@
+-- Modifications copyright (C) 2021 Peter Andersen
 { name = "halogen-template-extended"
 , packages = ./packages.dhall
 , sources =
