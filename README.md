@@ -17,9 +17,11 @@ This project can be viewed as either a fork/clone of [purescript-halogen-templat
 
 The [purescript-halogen-template](https://github.com/purescript-halogen/purescript-halogen-template) repo is a fantastic place to start if today is Day #1 for you with Purescript's Halogen framework. I have included the rest of `purescript-halogen-template`'s README (as at 2021-08-27) below also under the heading "Introduction (purescript-halogen-template)", modified to reflect the build instructions for this project.
 
-The primary purpose of this extended template is to add two key features from Thomas Honeyman's excellent [Real World Halogen](https://github.com/thomashoneyman/purescript-halogen-realworld) SPA app. Namely:
+The primary purpose of this extended template is to extract just two key features from Thomas Honeyman's excellent [Real World Halogen](https://github.com/thomashoneyman/purescript-halogen-realworld) SPA app. Namely:
   - Hash-based routing & navigation (using [PureScript Routing Duplex](https://github.com/natefaubion/purescript-routing-duplex))
   - A global `Store` containing the profile of the currently logged-in user (using [PureScript Halogen Store](https://github.com/thomashoneyman/purescript-halogen-store))
+
+The [Real World Halogen](https://github.com/thomashoneyman/purescript-halogen-realworld) repository can be a lot for a beginner to tackle at once, with many interconnected parts. This extended template is meant to be a first step toward the direction of something that has the foundations of a "real world" app, but stripped back so that it is easier for a beginner to grasp.
 
 There are 4 components in this project: a parent [Component.Router](https://github.com/and-pete/purescript-halogen-template-extended/blob/main/src/Component/Router.purs) module that has 3 child routes that each correspond to a "page" of the site.
 
@@ -46,9 +48,14 @@ There are many features of the [Real World Halogen](https://github.com/thomashon
 
   1)  Delete or improve the silly fake console that logs the route changes
 
+Comments, feedback, etc. are all always welcome.
+
+Enoy! -Peter :)
+
+--- 
+
 The original [purescript-halogen-template](https://github.com/purescript-halogen/purescript-halogen-template) README is included below. If this is Day #1 of Halogen for you, you should start with that simpler repository (...and of course with the [official PureScript Halogen Guide](https://purescript-halogen.github.io/purescript-halogen/)).
 
----
 
 ## Introduction (`purescript-halogen-template`)
 
