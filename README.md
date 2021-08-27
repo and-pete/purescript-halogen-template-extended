@@ -4,7 +4,7 @@
 
 ### Quick Start
 ```sh
-git clone https://github.com/and-pete/purescript-halogen-template-extended halogen-project
+git clone https://github.com/and-pete/purescript-halogen-template-extended.git halogen-project
 cd halogen-project
 npm install
 npm run build
