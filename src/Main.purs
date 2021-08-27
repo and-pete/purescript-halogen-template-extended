@@ -1,6 +1,8 @@
 -- | See comments in purescript-halogen-realworld's `Main` module:
 -- | https://github.com/thomashoneyman/purescript-halogen-realworld/blob/main/src/Main.purs
 
+-- | Modifications copyright (C) 2021 Peter Andersen
+
 module Main where
 
 import Prologue
