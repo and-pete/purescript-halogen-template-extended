@@ -1,4 +1,6 @@
-# Halogen Template (extended with routing and a global store)
+# Halogen Template (Extended)
+
+..."extended" with SPA-like routing and a global store carrying the logged-in/logged-out state of a nominal user.
 
 ### Quick Start
 ```sh
