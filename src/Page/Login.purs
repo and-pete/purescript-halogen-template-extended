@@ -11,6 +11,7 @@ import Web.UIEvent.MouseEvent as MouseEvent
 
 import App.Capability.Navigate (class MonadNavigate)
 import App.Capability.Navigate as Navigate
+import App.Capability.Log (class MonadLog, logMessage)
 import App.Capability.Resource.User (class MonadUser)
 import App.Capability.Resource.User as User
 import App.Data.Username as Username
@@ -28,6 +29,7 @@ type Slot = H.Slot (Const Void) Void Unit
 component
   :: forall m q o
    . MonadEffect m
+  => MonadLog m
   => MonadNavigate m
   => MonadUser m
   => H.Component q Input o m
@@ -69,7 +71,9 @@ component =
         H.liftEffect $ Event.preventDefault (MouseEvent.toEvent mouseEvent)
         case Username.parse rawUsername of
           Nothing -> pure unit
-          Just username -> do
-            _ <- User.loginUser username
+          Just name -> do
+            _ <- User.loginUser name
+            logMessage $ "Signing in as user '" <> Username.toString name <> "'"
             shouldRedirect <- H.gets _.redirect
-            when shouldRedirect $ Navigate.navigate Home
+            when shouldRedirect do
+              Navigate.navigate Home

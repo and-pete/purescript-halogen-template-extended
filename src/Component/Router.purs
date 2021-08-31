@@ -5,17 +5,18 @@ module App.Component.Router where
 
 import Prologue
 
-import Data.Array as A
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.Store.Connect as HSC
 import Halogen.Store.Select as HSS
 import Halogen.Store.Monad (class MonadStore)
+import Halogen.Store.Monad as HSM
 import Routing.Duplex as RD
 import Routing.Hash as RH
 
 import App.Capability.Navigate (class MonadNavigate)
 import App.Capability.Navigate as Navigate
+import App.Capability.Log (class MonadLog, logMessage)
 import App.Capability.Resource.User (class MonadUser)
 import App.Component.HTML.Navbar (navbarPageWrapper)
 import App.Data.Profile (Profile)
@@ -34,13 +35,14 @@ type ConnectedInput = HSC.Connected Context Input
 
 type State =
   { route :: Maybe Route
-  , changeLog :: Array String
+  , messageLog :: Array String
   , currentUser :: Maybe Profile
   }
 
 data Action
   = Initialize
   | Receive { input :: Input, context :: Context } -- i.e. `Receive ConnectedInput`
+  | UpdateMessageLog (Array String)
 
 type ChildSlots =
   ( home     :: Home.Slot
@@ -51,6 +53,7 @@ type ChildSlots =
 component
   :: forall o m
    . MonadEffect m
+  => MonadLog m
   => MonadNavigate m
   => MonadUser m
   => MonadStore Store.Action Store m
@@ -72,7 +75,7 @@ component =
     initialState :: ConnectedInput -> State
     initialState = \{ context: currentUser } ->
       { route: Nothing
-      , changeLog: []
+      , messageLog: []
       , currentUser
       }
   
@@ -82,6 +85,12 @@ component =
     handleAction = case _ of
 
       Initialize -> do
+        -- Example of subscribing to changes in the `Store`
+        -- by creating an emitter (instead of using `connect`
+        -- to Receive updates from the store).
+        newLogEmitter <- HSM.emitSelected (HSS.selectEq _.recentMessageLog)
+        void $ H.subscribe (UpdateMessageLog <$> newLogEmitter)
+
         -- Handles setting of the initial route on app startup. All
         -- subsequent route changes handled through `Navigate`
         -- query sent by driver in `main`
@@ -90,6 +99,11 @@ component =
         
       Receive connectedInput ->
         Store.updateLocalState connectedInput
+
+      UpdateMessageLog newLog -> do
+        currentLog <- H.gets _.messageLog
+        when (newLog /= currentLog) do
+          H.modify_ _ { messageLog = newLog }
 
     handleQuery
       :: forall a
@@ -103,20 +117,17 @@ component =
         maybeOldRoute <- H.gets _.route
         when (maybeOldRoute /= Just newRoute) do
           H.modify_ _ { route = Just newRoute }
-          logMessage $ showRouteChange maybeOldRoute newRoute      
+          logMessage $ displayRouteChange maybeOldRoute newRoute      
         pure ( Just a )
         
       where
-        -- TODO: - Factor this out to a class that can be used in any component
-        logMessage :: String -> H.HalogenM State Action ChildSlots o m Unit
-        logMessage msg = H.modify_ \st -> st { changeLog = msg `A.cons` st.changeLog }
-        
-        showRouteChange :: Maybe Route -> Route -> String
-        showRouteChange = case _, _ of
+        displayRouteChange :: Maybe Route -> Route -> String
+        displayRouteChange = case _, _ of
           Nothing, new ->
             "Setting initial route to /#" <> RD.print routeCodec new
           Just old, new ->
-            "Changing route from /#" <> RD.print routeCodec old <> " to /#" <> RD.print routeCodec new
+               "Changing route from /#" <> RD.print routeCodec old
+            <> " to /#" <> RD.print routeCodec new
 
     -- | Renders a page component depending on which route is matched.
     -- | Also logs + renders route change events to a fake console.

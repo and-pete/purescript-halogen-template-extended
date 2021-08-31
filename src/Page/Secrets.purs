@@ -14,6 +14,7 @@ import Web.UIEvent.MouseEvent as MouseEvent
 
 import App.Capability.Navigate (class MonadNavigate)
 import App.Capability.Navigate as Navigate
+import App.Capability.Log (class MonadLog, logMessage)
 import App.Capability.Resource.User (class MonadUser)
 import App.Component.HTML.Util (maybeElem)
 import App.Data.Username as Username
@@ -39,8 +40,9 @@ type Slot = H.Slot (Const Void) Void Unit
 component
   :: forall m q o
    . MonadStore Store.Action Store m
-  => MonadUser m
+  => MonadLog m
   => MonadNavigate m
+  => MonadUser m
   => H.Component q Input o m
 component =
   HSC.connect (HSS.selectEq _.currentUser) $ 
@@ -91,4 +93,5 @@ component =
         
       HandleLogout mouseEvent -> do
         H.liftEffect $ Event.preventDefault (MouseEvent.toEvent mouseEvent)
+        logMessage "Signing out"
         Navigate.logoutUser

@@ -22,7 +22,7 @@ main = HA.runHalogenAff do
   body <- HA.awaitBody
   
   let
-    initialStore = { currentUser: Nothing }
+    initialStore = { currentUser: Nothing, recentMessageLog: [] }
     routerInput = unit
     
   componentAff <- runAppM initialStore Router.component
