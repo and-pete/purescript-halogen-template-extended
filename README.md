@@ -42,10 +42,6 @@ There are many features of the [Real World Halogen](https://github.com/thomashon
   - Logging
   - How to integrate an interface (or "Capability") for CRUD-style operations
 
-### TODO
-
-  1)  Delete or improve the silly fake console that logs the route changes
-
 Comments, feedback, etc. are all always welcome.
 
 Enoy! -Peter :)
