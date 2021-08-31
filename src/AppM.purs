@@ -12,7 +12,7 @@ import Routing.Duplex as RD
 import Routing.Hash as RH
 
 import App.Capability.Navigate (class MonadNavigate, navigate)
-import App.Capability.Log (class MonadLog, logMessage)
+import App.Capability.Log (class MonadLog)
 import App.Capability.Resource.User (class MonadUser)
 import App.Data.Username (Username)
 import App.Data.Profile (Profile)
