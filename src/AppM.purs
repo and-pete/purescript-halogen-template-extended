@@ -12,6 +12,7 @@ import Routing.Duplex as RD
 import Routing.Hash as RH
 
 import App.Capability.Navigate (class MonadNavigate, navigate)
+import App.Capability.Log (class MonadLog)
 import App.Capability.Resource.User (class MonadUser)
 import App.Data.Username (Username)
 import App.Data.Profile (Profile)
@@ -52,3 +53,8 @@ instance MonadUser AppM where
     let profile = { username }
     HSM.updateStore $ LoginUser profile
     pure (Just profile)
+
+instance MonadLog AppM where
+  logMessage :: String -> AppM Unit
+  logMessage msg = do
+    HSM.updateStore $ UpdateMessageLog msg
