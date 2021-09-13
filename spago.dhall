@@ -20,6 +20,7 @@
     , "psci-support"
     , "routing"
     , "routing-duplex"
+    , "safe-coerce"
     , "transformers"
     , "web-events"
     , "web-uievents"

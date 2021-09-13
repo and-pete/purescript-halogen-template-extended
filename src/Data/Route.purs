@@ -3,7 +3,7 @@
 
 module App.Data.Route where
 
-import Prologue
+import Prologue hiding ((/))
 
 import Data.Generic.Rep (class Generic)
 import Data.Show.Generic (genericShow)
