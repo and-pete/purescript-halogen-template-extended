@@ -113,7 +113,8 @@ component =
       
       Navigate newRoute a -> do
         -- This query runs every time the brower's hash route changes,
-        -- sent down by `matchesWith` in `main`.
+        -- sent down by `matchesWith` in `main`. Also logs the route
+        -- change to a fake console.
         maybeOldRoute <- H.gets _.route
         when (maybeOldRoute /= Just newRoute) do
           H.modify_ _ { route = Just newRoute }
@@ -130,7 +131,6 @@ component =
             <> " to /#" <> RD.print routeCodec new
 
     -- | Renders a page component depending on which route is matched.
-    -- | Also logs + renders route change events to a fake console.
     render :: State -> H.ComponentHTML Action ChildSlots m
     render state@{ route, currentUser } =
       navbarPageWrapper state $ case route of
