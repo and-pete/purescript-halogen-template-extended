@@ -75,24 +75,3 @@ logOutputPanel msgs =
     , HH.ul_
         (map (\x -> HH.li_ [ HH.text x ]) msgs)
     ]
-
--- wrapperStyle :: String
--- wrapperStyle = 
---   """
---   display: flex;
---   flex-direction: column;
---   justify-content: space-between;
---   height: calc(100vh - 18px)
---   """
-
--- consoleStyle :: String
--- consoleStyle =
---   """
---   min-height: 275px;
---   background: #282c34;
---   color: #e06c75;
---   font-family: 'Consolas';
---   padding: 5px 20px 5px 20px;
---   """
-
-
