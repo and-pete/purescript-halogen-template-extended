@@ -1,7 +1,11 @@
 -- | See comments in purescript-halogen-realworld's `Conduit.AppM` module:
 -- | https://github.com/thomashoneyman/purescript-halogen-realworld/blob/main/src/AppM.purs
 
-module App.AppM where
+module App.AppM
+  ( AppM
+  , runAppM
+  )
+  where
 
 import Prologue
 

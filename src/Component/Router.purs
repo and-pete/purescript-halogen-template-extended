@@ -1,7 +1,11 @@
 -- | See comments in purescript-halogen-realworld (RHW)'s `Conduit.Component.Router` module:
 -- | https://github.com/thomashoneyman/purescript-halogen-realworld/blob/main/src/Component/Router.purs
 
-module App.Component.Router where
+module App.Component.Router
+  ( Query(..)
+  , component
+  )
+  where
 
 import Prologue
 
@@ -35,7 +39,7 @@ type ConnectedInput = HSC.Connected Context Input
 
 type State =
   { route :: Maybe Route
-  , messageLog :: Array String
+  , consoleHistory :: Array String
   , currentUser :: Maybe Profile
   }
 
@@ -75,7 +79,7 @@ component =
     initialState :: ConnectedInput -> State
     initialState = \{ context: currentUser } ->
       { route: Nothing
-      , messageLog: []
+      , consoleHistory: []
       , currentUser
       }
   
@@ -101,9 +105,9 @@ component =
         Store.updateLocalState connectedInput
 
       UpdateMessageLog newLog -> do
-        currentLog <- H.gets _.messageLog
+        currentLog <- H.gets _.consoleHistory
         when (newLog /= currentLog) do
-          H.modify_ _ { messageLog = newLog }
+          H.modify_ _ { consoleHistory = newLog }
 
     handleQuery
       :: forall a

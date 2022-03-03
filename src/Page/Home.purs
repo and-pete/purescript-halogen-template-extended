@@ -1,4 +1,8 @@
-module App.Page.Home where
+module App.Page.Home
+  ( Slot
+  , component
+  )
+  where
 
 import Prologue
 
@@ -51,15 +55,26 @@ component =
     render { currentUser } =
       HH.div_
         [ HH.h1_ [ HH.text "Home page" ]
-        , HH.p_ [ HH.text message ]
+        , content
         ]      
       where
-      message :: String
-      message = case currentUser of
+      content = case currentUser of
         Nothing ->
-          "Welcome, guest. Perhaps consider logging in?"
+          HH.p_ [ HH.text "Welcome, guest. Perhaps consider logging in?" ]
         Just profile ->
-          "WELCOME HOME, " <> Username.toString profile.username <> "!! Your secrets page is now available."
+          HH.div_
+            [ HH.p_
+                [ HH.text ("WELCOME BACK, " <> Username.toString profile.username <> "!")
+                ]
+            , HH.p_
+                [ HH.strong_
+                  [ HH.text "Your secrets page (🕵) is now available via the navigation bar."
+                  ]
+                ]
+            , HH.p_
+                [ HH.text "On the secrets page, you can also sign out from this session"
+                ]
+            ]
 
     handleAction
       :: Action

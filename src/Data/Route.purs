@@ -1,7 +1,11 @@
 -- | See comments in purescript-halogen-realworld (RHW)'s `Conduit.Data.Route` module:
 -- | https://github.com/thomashoneyman/purescript-halogen-realworld/blob/main/src/Data/Route.purs
 
-module App.Data.Route where
+module App.Data.Route
+  ( Route(..)
+  , routeCodec
+  )
+  where
 
 import Prologue hiding ((/))
 

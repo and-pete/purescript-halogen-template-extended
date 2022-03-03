@@ -1,7 +1,13 @@
 -- | See comments in purescript-halogen-realworld's `Conduit.Store` module:
 -- | https://github.com/thomashoneyman/purescript-halogen-realworld/blob/main/src/Store.purs
 
-module App.Store where
+module App.Store
+  ( Action(..)
+  , Store
+  , reduce
+  , updateLocalState
+  )
+  where
 
 import Prologue
 
