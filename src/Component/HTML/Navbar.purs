@@ -9,56 +9,90 @@ import Halogen.HTML.Properties as HP
 
 import App.Data.Profile (Profile)
 import App.Data.Route (Route(..))
-import App.Component.HTML.Util (navItem, whenElem)
+import App.Component.HTML.Util (safeHref, whenElem)
+import App.Component.HTML.Style.Navbar
+  ( loggerCSS
+  , mainAreaStyle
+  , navCSS
+  , navItemCSS
+  , navListCSS
+  , wrapperCSS
+  )            
 
-            
 navbarPageWrapper
   :: forall w i r
-   . { currentUser :: Maybe Profile, messageLog :: Array String | r }
+   . { currentUser :: Maybe Profile, consoleHistory :: Array String, route :: Maybe Route | r }
   -> HH.HTML w i
   -> HH.HTML w i
-navbarPageWrapper { currentUser, messageLog } innerHtml =
+navbarPageWrapper { currentUser, consoleHistory, route } innerHtml =
   HH.div
-    [ HP.style wrapperStyle ]
-    [ HH.div_ [ navbar, innerHtml ]
-    , HH.div_ [ HH.hr_, fakeConsole messageLog ]
-    ] 
-  where
-    navbar :: HH.HTML w i
-    navbar =
-      HH.ul_
-        [ navItem Home "Home"
-
-        , whenElem (isNothing currentUser) \_ ->
-            navItem Login "Log in"
-
-        , whenElem (isJust currentUser) \_ ->
-            navItem Secrets "Secrets"
+    [ HP.style (wrapperCSS route) ]
+    [ HH.div
+        [ HP.style mainAreaStyle ]
+        [ navbar currentUser
+        , innerHtml
         ]
-
-    fakeConsole :: Array String -> HH.HTML w i
-    fakeConsole messages =
-      HH.div
-        [ HP.style consoleStyle  ]
-        [ HH.h2 [ HP.style "font-variant: small-caps;"  ] [ HH.text "Fake Console: " ]
-        , HH.ul_ $ map (\msg -> HH.li_ [ HH.text msg ]) messages
+    , HH.div_
+        [ HH.hr_
+        , logOutputPanel consoleHistory
         ]
+    ]
 
-wrapperStyle :: String
-wrapperStyle = 
-  """
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: calc(100vh - 18px)
-  """
+navbar :: forall w i. Maybe Profile -> HH.HTML w i
+navbar currentUser =
+  HH.nav
+  [ HP.style navCSS
+  ]
+  [ HH.ul
+      [ HP.style navListCSS ]
+      [ navItem Home "🏡" "Home"
 
-consoleStyle :: String
-consoleStyle =
-  """
-  min-height: 275px;
-  background: #282c34;
-  color: #e06c75;
-  font-family: 'Consolas';
-  padding: 5px 20px 5px 20px;
-  """
+      , whenElem (isNothing currentUser) \_ ->
+          navItem Login "🔑" "Log in"
+
+      , whenElem (isJust currentUser) \_ ->
+          navItem Secrets "🕵" "Secrets️"
+      ]
+  ]
+
+navItem :: forall w i. Route -> String -> String -> HH.HTML w i
+navItem route emoji label =
+  HH.li
+    [ HP.style navItemCSS ]
+    [ HH.text emoji
+    , HH.a
+        [ safeHref route, HP.style "margin-left: 0.25rem;" ]
+        [ HH.text label ]
+    ]
+
+
+logOutputPanel :: forall w i. Array String -> HH.HTML w i
+logOutputPanel msgs =
+  HH.div
+    [ HP.style loggerCSS  ]
+    [ HH.h2_
+        [ HH.text "Logger Output:" ]
+    , HH.ul_
+        (map (\x -> HH.li_ [ HH.text x ]) msgs)
+    ]
+
+-- wrapperStyle :: String
+-- wrapperStyle = 
+--   """
+--   display: flex;
+--   flex-direction: column;
+--   justify-content: space-between;
+--   height: calc(100vh - 18px)
+--   """
+
+-- consoleStyle :: String
+-- consoleStyle =
+--   """
+--   min-height: 275px;
+--   background: #282c34;
+--   color: #e06c75;
+--   font-family: 'Consolas';
+--   padding: 5px 20px 5px 20px;
+--   """
+
+
