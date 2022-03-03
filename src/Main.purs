@@ -3,7 +3,10 @@
 
 -- | Modifications copyright (C) 2021 Peter Andersen
 
-module Main where
+module Main
+  ( main
+  )
+  where
 
 import Prologue
 

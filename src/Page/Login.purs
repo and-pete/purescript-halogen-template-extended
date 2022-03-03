@@ -1,4 +1,9 @@
-module App.Page.Login where
+module App.Page.Login
+  ( Input
+  , Slot
+  , component
+  )
+  where
 
 import Prologue
 

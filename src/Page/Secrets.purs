@@ -1,10 +1,15 @@
-module App.Page.Secrets where
+module App.Page.Secrets
+  ( Slot
+  , component
+  )
+  where
 
 import Prologue
 
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties as HP
 import Halogen.Store.Connect as HSC
 import Halogen.Store.Monad (class MonadStore)
 import Halogen.Store.Select as HSS
@@ -69,7 +74,12 @@ component =
         HH.div_
           [ HH.h1_ [ HH.text (name <> "'s page of secrets") ]
           , HH.p_ [ HH.text ("Hello, " <> name <> ".\n") ]
-          , HH.p_ [ HH.text "Your Secret: `traverse`" ]
+          , HH.p_
+              [ HH.text "Your Secret: "
+              , HH.code
+                  [ HP.style "background: #FFFFC5"  ]
+                  [ HH.strong_ [ HH.text "traverse" ] ]
+              ]
           , HH.button
             [ HE.onClick \mouseEvent -> HandleLogout mouseEvent ]
             [ HH.text "Sign out"
