@@ -6,10 +6,8 @@
     "spago": "^0.20.7"
   },
   "scripts": {
-    "install": "npm run nuke && spago install && npm run build",
     "build": "spago build",
     "test": "spago test",
-    "nuke": "rm -rfv .spago .parcel-cache output node_modules",
     "serve": "parcel serve --open --port 1234 dev/index.html",
     "build-prod": "mkdir -p prod && cp dev/index.html prod/ && rm -rf dist && spago bundle-app --to prod/index.js && parcel build prod/index.html"
   }
