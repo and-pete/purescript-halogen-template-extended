@@ -35,4 +35,4 @@ main = HA.runHalogenAff do
   -- Listens to the route changes and tells the router component
   void $ liftEffect $ RH.matchesWith ( RD.parse routeCodec ) \mOld new ->
     when ( mOld /= Just new ) do
-      launchAff_ $ halogenIO.query $ H.mkTell $ Router.Navigate new   
+      launchAff_ $ void $ halogenIO.query $ H.mkTell $ Router.Navigate new   
